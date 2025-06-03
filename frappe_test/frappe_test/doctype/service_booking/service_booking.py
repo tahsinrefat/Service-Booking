@@ -7,8 +7,11 @@ from frappe.model.document import Document
 
 class ServiceBooking(Document):
 	def validate(self):
-		# self.send_email()
+		self.send_email()
 		pass
+
+	def on_submit(self):
+		self.send_email()
   
 	def send_email(self):
 		recipient = frappe.db.get_value(
@@ -17,8 +20,8 @@ class ServiceBooking(Document):
 			"user_id"
 		)
   
-		subject = "Test for Service Booking"
-		message = "Hello "+self.customer_name+",\nThis is a test email for service booking."
+		subject = "Service Booking Confirmation"
+		message = "Hello "+self.customer_name+",\n"+"Your Requested Appointemnt on "+self.datetime+" has been approved. We expect your timely arrival at the appointment.\n"+"Regards,\nService Booking Ltd"
 		frappe.sendmail(
 			recipients=[recipient],
 			subject=subject,

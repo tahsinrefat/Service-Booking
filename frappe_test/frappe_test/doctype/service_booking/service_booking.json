@@ -18,7 +18,8 @@
   "other_service_type",
   "column_break_adac",
   "datetime",
-  "status"
+  "status",
+  "workflow_state"
  ],
  "fields": [
   {
@@ -70,7 +71,8 @@
    "depends_on": "eval: doc.service_type == \"Others\"",
    "fieldname": "other_service_type",
    "fieldtype": "Data",
-   "label": "Other Service Type"
+   "label": "Other Service Type",
+   "mandatory_depends_on": "eval: doc.service_type == \"Others\""
   },
   {
    "fieldname": "column_break_adac",
@@ -79,31 +81,43 @@
   {
    "fieldname": "datetime",
    "fieldtype": "Datetime",
-   "label": "Date/Time"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Requested\nApproved\nCompleted",
-   "read_only": 1
+   "label": "Date/Time",
+   "reqd": 1
   },
   {
    "fieldname": "customer",
    "fieldtype": "Link",
    "label": "Customer",
-   "options": "Employee"
+   "options": "Employee",
+   "reqd": 1
   },
   {
    "fieldname": "column_break_oryc",
    "fieldtype": "Column Break"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "workflow_state",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Workflow State",
+   "options": "Draft\nRequested\nApproved\nCompleted\nRejected\nCancelled",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nRequested\nApproved\nCompleted",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-06-03 01:13:56.045120",
+ "modified": "2025-06-03 21:46:31.046521",
  "modified_by": "Administrator",
  "module": "Frappe Test",
  "name": "Service Booking",
