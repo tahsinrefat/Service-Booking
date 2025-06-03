@@ -1,5 +1,8 @@
 ### Frappe Test
-
+OS: Ubuntu 22.04
+Python Version: v3.10.12
+ERPNext/Frappe: v15
+Tools: VSCode
 A custom app for testing and stuffs.
 
 ### Installation
