@@ -6,9 +6,6 @@ from frappe.model.document import Document
 
 
 class ServiceBooking(Document):
-	def validate(self):
-		self.send_email()
-		pass
 
 	def on_submit(self):
 		self.send_email()
@@ -19,9 +16,12 @@ class ServiceBooking(Document):
 			self.customer,
 			"user_id"
 		)
-  
+
+		str_datetime = self.datetime.strftime("%d %B %Y")
 		subject = "Service Booking Confirmation"
-		message = "Hello "+self.customer_name+",\n"+"Your Requested Appointemnt on "+self.datetime+" has been approved. We expect your timely arrival at the appointment.\n"+"Regards,\nService Booking Ltd"
+		message = "Hello " + self.customer_name + ",<br><br>" + \
+          "Your Requested Appointment on " + str_datetime + " has been approved. We expect your timely arrival at the appointment.<br><br>" + \
+          "Regards,<br>Service Booking Ltd"
 		frappe.sendmail(
 			recipients=[recipient],
 			subject=subject,
